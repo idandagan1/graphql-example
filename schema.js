@@ -7,9 +7,9 @@ const {
     GraphQLString,
 } = require('graphql');
 
-const PersonType = new GraphQLObjectType({
-    name: 'Person',
-    description: 'Somebody that you used to know',
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    description: 'Some description',
     fields: () => ({
         id: {
             type: GraphQLID,
@@ -29,13 +29,13 @@ const PersonType = new GraphQLObjectType({
         },
         email: {
             type: GraphQLString,
-            description: 'Where to send junk mail',
+            description: 'user primary email',
         },
         friends: {
-            type: new GraphQLList(PersonType),
-            description: 'People who lent you money',
+            type: new GraphQLList(UserType),
+            description: 'users friends',
             resolve: (obj, args, { loaders }) =>
-                loaders.person.loadManyByURL(obj.friends),
+                loaders.user.loadMany(obj.friends),
         },
     }),
 });
@@ -44,15 +44,14 @@ const PersonType = new GraphQLObjectType({
 module.exports = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
-        description: '...',
 
         fields: () => ({
-            person: {
-                type: PersonType,
+            user: {
+                type: UserType,
                 args: {
                     id: { type: new GraphQLNonNull(GraphQLID) },
                 },
-                resolve: (root, args, { loaders }) => loaders.person.load(args.id),
+                resolve: (root, args, { loaders }) => loaders.user.load(args.id),
             },
         })
     })
