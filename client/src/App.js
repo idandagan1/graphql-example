@@ -2,13 +2,8 @@ import React, {Component} from 'react';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 import autobind from 'autobind-decorator';
-import Input from '@material-ui/core/Input';
 import {withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Paper from '@material-ui/core/Paper';
+import { Paper, CircularProgress, Typography, TextField, Button, Input } from 'material-ui';
 import './App.css';
 
 
